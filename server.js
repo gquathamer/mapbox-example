@@ -10,17 +10,20 @@ app.use(cors({
   }))
 
 app.get('/getTile/:zoom/:x/:y', (req, res) => {
-    fetch(`https://api.lightboxre.com/v1/spatialstream/GetMap.aspx?sld=SS.Prop.BDE.ParcelDetail/styles/ParcelDetail/default.sld.xml&layers=ss.base.parcels/ParcelTiles&x=${req.params.zoom}&y=${req.params.y}&z=${req.params.x}`, { 
+    console.log(`https://api.lightboxre.com/v1/spatialstream/GetMap.aspx?layers=ss.base.parcels/ParcelTiles&z=${req.params.zoom}&y=${req.params.y}&x=${req.params.x}`);
+    fetch(`https://api.lightboxre.com/v1/spatialstream/GetMap.aspx?layers=ss.base.parcels/ParcelTiles&z=${req.params.zoom}&y=${req.params.y}&x=${req.params.x}`, { 
         headers: {
-            "Content-Type": "image/png",
             // Your Lightbox key will come from the .env file
             "x-api-key": process.env.LIGHTBOX_API_KEY
         }
     })
-        .then(response => response.arrayBuffer())
+        .then(response => {
+            console.log(response);
+            return response.arrayBuffer()
+        })
         .then(image => {
             res.contentType('image/png');
-            res.send(Buffer.from(image));
+            res.send(image);
         })
         .catch(error => console.error(error));
 })

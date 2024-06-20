@@ -4,22 +4,6 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
     center: [-104.96975965067962, 39.76779362796033], // starting position [lng, lat]
     zoom: 16 // starting zoom
-    /* transformRequest: (url, resourceType) => {
-        if (resourceType === 'Tile' && url.startsWith('https://api.lightboxre.com/v1/spatialstream')) {
-        // Add custom headers
-            return {
-                url: url,
-                headers: {
-                    'x-api-key': 'EVJMzVqdlvNMxYYEXO86zb05fyPi3XFz',
-                    'content-type': 'image/png'
-                // Add any other custom headers as needed
-                }
-            };
-        } else {
-        // For other requests, return the original URL
-            return { url: url };
-        }
-    } */
 });
 
 map.on('load', () => {
